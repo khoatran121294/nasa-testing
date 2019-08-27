@@ -1,0 +1,74 @@
+
+@import "../../styles/variables";
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1;
+  overflow: auto;
+
+  .backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: $black;
+    opacity: 0.6;
+    z-index: 2;
+  }
+
+  .modal {
+    width: 90vw;
+    background: $white;
+    border-radius: 5px;
+    margin-top: 5vw;
+    z-index: 3;
+    @media #{$for-normaldesktop} {
+      width: 50%;
+      margin: 100px 0;
+    }
+    @media #{$for-desktop} {
+        width: 70%;
+        margin: 100px 0;
+    }
+
+    .modal-header {
+      height: 60px;
+      border-bottom: 1px solid #CCC;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      .modal-title {
+        font-size: 25px;
+      }
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
+    .modal-body {
+      padding: 20px;
+      min-height: 200px;
+    }
+    .modal-footer {
+      height: 70px;
+      border-top: 1px solid #CCC;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 20px;
+      
+      .btn {
+        margin-left: 10px;
+      }
+    }
+  }
+}

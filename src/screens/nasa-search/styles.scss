@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.search-container {
+  width: 100%;
+  display: block;
+  .link-back {
+    font-size: 18px;
+    color: $btn-primary;
+    white-space: nowrap;
+  }
+  .search-result {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    .txt-result {
+      font-size: 20px;
+    }
+  }
+  .search-input {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+    @media #{$for-nonemobile} {
+      width: 50%;
+    }
+  }
+}

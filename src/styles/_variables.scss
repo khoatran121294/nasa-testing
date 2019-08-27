@@ -1,0 +1,23 @@
+// Typography
+$font-family-body: 'Verdana', 'Helvetica Neue', sans-serif;
+
+// Color
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$red: #ed0202;
+$gray: #CCC;
+$btn-primary: rgb(120, 80, 189);
+$btn-default: #CCC;
+$title: rgb(178, 178, 178);
+// global font size
+
+$for-tablet: "only screen and (min-width: 600px) and (max-width: 991px)";
+$for-desktop: "only screen and (min-width: 992px) and (max-width: 1365px)";
+$for-normaldesktop: "only screen and (min-width: 1366px)";
+$for-nonemobile: "only screen and (min-width: 768px)";
+
+%text-nowrap {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

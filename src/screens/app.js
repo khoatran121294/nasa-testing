@@ -10,8 +10,8 @@ class App extends Component {
     return (
       <div className="app">
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/nasa-search" component={NasaSearch} />
+          <Route path="/" component={Home} />
+          <Route path="/nasa-search" component={NasaSearch} />
           <Route render={() => <div className="NotFoundMessage">404 Page Not Found</div>} />
         </Switch>
       </div>

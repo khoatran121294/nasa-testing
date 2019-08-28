@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import _ from "lodash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Collection from "../../components/collection";
 import CollectionModal from "../../screens/collection-modal";
 import { DELETE_COLLECTION, TOGGLE_FAVOURITE } from "../../actions";
+import EmptyAlert from "../../components/empty-alert";
 import "./styles.scss";
 
 class Home extends Component {
@@ -16,29 +20,20 @@ class Home extends Component {
   }
   render() {
     const { collections } = this.props.collectionStore;
+    const isEmpty = _.isEmpty(collections);
     const { isOpenEdit, selectedCollection } = this.state;
     return (
       <div className="home-container">
         <div className="header">
           <span className="title">Nasa Collection</span>
           <Link to="/nasa-search" className="btn btn-primary">
-            <span>Add new item</span>
+            <FontAwesomeIcon icon={faPlus} size="2x" />
           </Link>
         </div>
         <div className="main-body">
-          <div className="card-flow">
-            {collections.map((item, index) => (
-              <div className="card-wrapper" key={index}>
-                <Collection
-                  data={item}
-                  isAdded={true}
-                  showEditForm={() => this.showEditForm(item)}
-                  onDelete={() => this.onRemoveCollection(item.nasa_id)}
-                  onToggleFavourite={() => this.onToggleFavourite(item.nasa_id)}
-                />
-              </div>
-            ))}
-          </div>
+          {
+            isEmpty ? <EmptyAlert message={"Collection is empty"} /> : this.renderCollectionList(collections)
+          }
         </div>
         <CollectionModal
           isOpen={isOpenEdit}
@@ -50,6 +45,21 @@ class Home extends Component {
       </div>
     );
   }
+  renderCollectionList = (collections) => (
+    <div className="card-flow">
+      {collections.map((item, index) => (
+        <div className="card-wrapper" key={index}>
+          <Collection
+            data={item}
+            isAdded={true}
+            showEditForm={() => this.showEditForm(item)}
+            onDelete={() => this.onRemoveCollection(item.nasa_id)}
+            onToggleFavourite={() => this.onToggleFavourite(item.nasa_id)}
+          />
+        </div>
+      ))}
+    </div>
+  );
   showEditForm = selectedCollection => {
     this.setState({
       isOpenEdit: true,

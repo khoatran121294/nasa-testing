@@ -1,5 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import _ from "lodash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./styles.scss";
 
 export default props => {
@@ -13,7 +15,9 @@ export default props => {
       <div className="modal">
         <div className="modal-header">
           <span className="modal-title">{title}</span>
-          <div className="modal-close" onClick={toggle}>Close</div>
+          <div className="modal-close" onClick={toggle}>
+            <FontAwesomeIcon icon={faTimes} size="2x" />
+          </div>
         </div>
         <div className="modal-body">
           {children}

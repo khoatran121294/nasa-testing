@@ -1,0 +1,14 @@
+
+@import "../../styles/variables";
+.empty-alert-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  .empty-text {
+    font-size: $h3;
+    color: $gray;
+  }
+}

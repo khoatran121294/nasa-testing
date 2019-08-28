@@ -1,6 +1,6 @@
 export const COLLECTION_TYPE = {
-  IMAGE: "Image",
-  VIDEO: "Video",
+  IMAGE: "image",
+  VIDEO: "video",
 };
 
 export const COLLECTION_TYPES = [

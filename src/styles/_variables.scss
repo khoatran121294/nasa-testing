@@ -1,23 +1,35 @@
 // Typography
-$font-family-body: 'Verdana', 'Helvetica Neue', sans-serif;
+$font-family-body: 'Courier New', Courier, monospace;
 
 // Color
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
-$red: #ed0202;
-$gray: #CCC;
+$red: rgb(237, 2, 2);
+$gray: rgb(178, 178, 178);
+$light-gray: rgb(243, 243, 243);
 $btn-primary: rgb(120, 80, 189);
-$btn-default: #CCC;
-$title: rgb(178, 178, 178);
-// global font size
+$btn-default: rgb(204, 204, 204);
 
 $for-tablet: "only screen and (min-width: 600px) and (max-width: 991px)";
 $for-desktop: "only screen and (min-width: 992px) and (max-width: 1365px)";
 $for-normaldesktop: "only screen and (min-width: 1366px)";
 $for-nonemobile: "only screen and (min-width: 768px)";
 
+$font-size-root: 11px;
+$h1: 2.4rem;
+$h2: 2.0rem;
+$h3: 1.6rem;
+$h4: 1.4rem;
+$h5: 1.2rem;
+$h6: 1.0rem;
+
 %text-nowrap {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+%placeholder {
+  font-family: $font-family-body;
+  color: $gray;
 }

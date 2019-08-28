@@ -11,6 +11,9 @@
     background: #CCC;
     overflow: hidden;
     text-align: center;
+    -webkit-box-shadow: 0px 10px 28px -10px $black;
+    -moz-box-shadow: 0px 10px 28px -10px $black;
+    box-shadow: 0px 10px 28px -10px $black;
 
     img {
       width: 100%;
@@ -21,6 +24,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: $h6;
     margin-top: 20px;
     .author-name {
       max-width: 60%;
@@ -28,14 +32,13 @@
     }
   }
   .title {
-    font-size: 20px;
-    color: #000;
+    font-size: $h3;
+    color: $black;
     padding: 10px 0;
     @extend %text-nowrap;
   }
   .description {
-    font-size: 18px;
-    // padding: 10px 0;
+    font-size: $h6;
     color: $gray;
     height: 100px;
     max-height: 100px;
@@ -51,10 +54,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #CCC;
+      border: 1px solid $gray;
+      color: $gray;
       cursor: pointer;
       margin-right: 10px;
       border-radius: 2px;
+      font-size: $h5;
 
       &:hover {
         opacity: 0.5;

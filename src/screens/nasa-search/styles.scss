@@ -1,10 +1,12 @@
 @import "../../styles/variables";
 
 .search-container {
+  display: flex;
   width: 100%;
-  display: block;
+  flex: 1;
+  flex-direction: column;
   .link-back {
-    font-size: 18px;
+    font-size: $h3;
     color: $btn-primary;
     white-space: nowrap;
   }
@@ -13,7 +15,7 @@
     display: flex;
     align-items: center;
     .txt-result {
-      font-size: 20px;
+      font-size: $h3;
     }
   }
   .search-input {

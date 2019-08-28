@@ -2,22 +2,25 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-family-body;
+  font-size: $font-size-root;
+  * {
+    font-family: $font-family-body;
+  }
 }
 .app {
   display: flex;
   flex: 1;
+  min-height: calc(100vh - 40px);
   padding: 20px;
   .btn {
     padding: 10px 20px;
     background: $btn-default;
     color: $black;
-    font-size: 16px;
+    font-size: $h6;
     border-radius: 5px;
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
-
     &.btn-primary {
       background: $btn-primary;
       color: $white;
@@ -32,33 +35,32 @@ body {
     align-items: center;
     margin-bottom: 20px;
     .title {
-      color: $title;
-      font-size: 25px;
+      color: $gray;
+      font-size: $h2;
       font-weight: 600;
       @media #{$for-nonemobile} {
-        font-size: 35px;
+        font-size: $h1;
       }
     }
   }
   .main-body {
-    width: 100%;
-    display: block;
-
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     .card-flow {
       display: flex;
       flex-flow: row wrap;
       .card-wrapper {
         width: 100%;
         margin-bottom: 20px;
-
         @media #{$for-normaldesktop} {
           width: calc(100% / 4);
         }
         @media #{$for-desktop} {
-            width: calc(100% / 3);
+          width: calc(100% / 3);
         }
         @media #{$for-tablet} {
-            width: calc(100% / 2);
+          width: calc(100% / 2);
         }
       }
     }
@@ -69,21 +71,25 @@ body {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #CCC;
+    border: 1px solid $light-gray;
+    border-radius: 5px;
+    &.invalid {
+      border-color: $red;
+    }
     .form-label {
-      font-size: 13px;
-      color: #CCC;
+      color: $gray;
+      font-size: $h5;
     }
     .form-input {
       width: 100%;
       border: none;
       outline: none;
-      font-size: 20px;
+      font-size: $h5;
     }
     .form-textarea {
       border: none;
       outline: none;
-      font-size: 20px;
+      font-size: $h5;
       min-height: 130px;
       resize: none;
     }
@@ -91,7 +97,7 @@ body {
       border: none;
       background: none;
       outline: none;
-      font-size: 20px;
+      font-size: $h5;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;

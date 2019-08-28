@@ -6,25 +6,44 @@ import { COLLECTION_TYPE, COLLECTION_TYPES } from "../../constants";
 import { SAVE_COLLECTION } from "../../actions";
 import "./styles.scss";
 
+const initialState = {
+  title: "",
+  description: "",
+  media_type: COLLECTION_TYPE.IMAGE,
+  thumnail: "",
+  fileUrl: "",
+  invalidTitle: null,
+  invalidDescription: null,
+  invalidThumnail: null,
+  invalidFileUrl: null,
+}
 class CollectionModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: "",
-      description: "",
-      type: COLLECTION_TYPE.IMAGE,
-      thumnail: "",
-      fileUrl: "",
-    };
+    this.state = { ...initialState };
   }
   render() {
-    const { title, description, type, thumnail, fileUrl } = this.state;
+    const {
+      title,
+      description,
+      media_type,
+      thumnail,
+      fileUrl,
+      invalidTitle,
+      invalidDescription,
+      invalidThumnail,
+      invalidFileUrl
+    } = this.state;
     return (
       <Modal
         {...this.props}
+        toggle={() => {
+          this.props.toggle();
+          this.setState({ ...initialState });
+        }}
         onSubmit={this.onSave}
       >
-        <div className="form-control">
+        <div className={`form-control ${invalidTitle ? "invalid" : ""}`}>
           <span className="form-label">
             Title {` `}
             <span className="required">*</span>
@@ -33,14 +52,14 @@ class CollectionModal extends Component {
             type="text"
             className="form-input"
             value={title}
-            onChange={e => {
-              console.log("e.target.value", e.target.value);
-              this.setState({ title: e.target.value })
-            }}
+            onChange={e => this.setState({ title: e.target.value })}
           />
         </div>
-        <div className="form-control">
-          <span className="form-label">Description {` `}</span>
+        <div className={`form-control ${invalidDescription ? "invalid" : ""}`}>
+          <span className="form-label">
+            Description {` `}
+            <span className="required">*</span>
+          </span>
           <textarea
             className="form-textarea"
             width="100%"
@@ -48,9 +67,13 @@ class CollectionModal extends Component {
             onChange={e => this.setState({ description: e.target.value })}
           />
         </div>
-        <div className="form-control">
+        <div className={`form-control`}>
           <span className="form-label">Type {` `}</span>
-          <select className="form-select">
+          <select
+            className="form-select" 
+            value={media_type} 
+            onChange={e => this.setState({ media_type: e.target.value })}
+          >
             {COLLECTION_TYPES.map((item, index) => (
               <option key={index} value={item}>
                 {item}
@@ -58,7 +81,7 @@ class CollectionModal extends Component {
             ))}
           </select>
         </div>
-        <div className="form-control">
+        <div className={`form-control ${invalidThumnail ? "invalid" : ""}`}>
           <span className="form-label">
             Link preview image url {` `}
             <span className="required">*</span>
@@ -70,7 +93,7 @@ class CollectionModal extends Component {
             onChange={e => this.setState({ thumnail: e.target.value })}
           />
         </div>
-        <div className="form-control">
+        <div className={`form-control ${invalidFileUrl ? "invalid" : ""}`}>
           <span className="form-label">
             Link file url {` `}
             <span className="required">*</span>
@@ -85,25 +108,58 @@ class CollectionModal extends Component {
       </Modal>
     );
   }
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { collection, isOpen } = this.props;
     if (isOpen !== prevProps.isOpen) {
       this.setState({ ...collection });
     }
   }
   onSave = () => {
-    const { collection } = this.props;
-    console.log("collection", collection);
-    const { title, description, type, thumnail, fileUrl } = this.state;
-    this.props.saveCollection({
+    const {
+      collection,
+      doActionAfterSaved,
+      toggle,
+      saveCollection
+    } = this.props;
+    const { title, description, media_type, thumnail, fileUrl } = this.state;
+    if (!this.isFormValid()) {
+      return;
+    }
+    saveCollection({
       ...collection,
       title,
-      description, 
-      type, 
-      thumnail, 
-      fileUrl,
+      description,
+      media_type,
+      thumnail,
+      fileUrl
     });
-    this.props.toggle();
+    if (doActionAfterSaved) {
+      doActionAfterSaved();
+    }
+    toggle();
+    this.setState({ ...initialState });
+  };
+  isFormValid = () => {
+    const { title, description, thumnail, fileUrl } = this.state;
+    const invalidTitle = _.isEmpty(title);
+    const invalidDescription = _.isEmpty(description);
+    const invalidThumnail = _.isEmpty(thumnail);
+    const invalidFileUrl = _.isEmpty(fileUrl);
+    this.setState({
+      invalidTitle,
+      invalidDescription,
+      invalidThumnail,
+      invalidFileUrl
+    });
+    if (
+      invalidTitle ||
+      invalidDescription ||
+      invalidThumnail ||
+      invalidFileUrl
+    ) {
+      return false;
+    }
+    return true;
   };
 }
 

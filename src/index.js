@@ -5,8 +5,6 @@ import { Provider } from "react-redux";
 import App from "./screens/App";
 import { store } from "./store";
 
-// import "./libs"
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

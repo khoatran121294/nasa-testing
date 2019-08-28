@@ -1,6 +1,7 @@
 @import "../../styles//variables";
 
 .home-container {
-  display: block;
-  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
